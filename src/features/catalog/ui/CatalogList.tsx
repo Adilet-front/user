@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import type { FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { getCategories } from "../../../entities/category/api/categoryApi";
@@ -14,11 +13,6 @@ import { Pagination } from "../../../shared/ui/Pagination/Pagination";
 import styles from "./CatalogList.module.scss";
 
 const PAGE_SIZE = 12;
-
-type SortOption = {
-  value: CatalogSort;
-  label: string;
-};
 
 const toCardBook = (book: CatalogBook): Book => ({
   id: book.id,
@@ -43,12 +37,10 @@ const CatalogSkeleton = () => (
 export const CatalogList = () => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
-  const [searchInput, setSearchInput] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | undefined>(
     undefined,
   );
-  const [sort, setSort] = useState<CatalogSort>("popular");
+  const sort: CatalogSort = "popular";
   const [page, setPage] = useState(1);
   const [isCompactPagination, setIsCompactPagination] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -66,16 +58,14 @@ export const CatalogList = () => {
     data: catalogData,
     isLoading,
     isError,
-    isFetching,
   } = useQuery({
-    queryKey: ["catalog", searchQuery, selectedCategoryId, sort, page],
+    queryKey: ["catalog", selectedCategoryId, sort, page],
     queryFn: () =>
       getCatalogBooks(
         {
           format: "all",
           language: "all",
           categoryId: selectedCategoryId,
-          searchQuery: searchQuery || undefined,
         },
         sort,
         page,
@@ -84,24 +74,10 @@ export const CatalogList = () => {
     placeholderData: keepPreviousData,
   });
 
-  const { items = [], total = 0, totalPages = 1 } = catalogData ?? {};
+  const { items = [], totalPages = 1 } = catalogData ?? {};
   const currentPage = Math.min(page, totalPages);
 
   const books: Book[] = items.map(toCardBook);
-
-  const selectedCategoryName = useMemo(
-    () => categories.find((item) => item.id === selectedCategoryId)?.name,
-    [categories, selectedCategoryId],
-  );
-
-  const sortOptions: SortOption[] = useMemo(
-    () => [
-      { value: "popular", label: t("catalog.sorts.popular") },
-      { value: "rating", label: t("catalog.sorts.rating") },
-      { value: "new", label: t("catalog.sorts.new") },
-    ],
-    [t],
-  );
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -115,17 +91,8 @@ export const CatalogList = () => {
     return () => mediaQuery.removeEventListener("change", applyState);
   }, []);
 
-  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSearchQuery(searchInput.trim());
-    setPage(1);
-  };
-
   const handleReset = () => {
-    setSearchInput("");
-    setSearchQuery("");
     setSelectedCategoryId(undefined);
-    setSort("popular");
     setPage(1);
   };
 
@@ -201,51 +168,6 @@ export const CatalogList = () => {
         </aside>
 
         <div className={styles.content}>
-          <form className={styles.toolbar} onSubmit={handleSearchSubmit}>
-            <label className={styles.searchField}>
-              <span className="sr-only">{t("search.placeholder")}</span>
-              <input
-                type="search"
-                value={searchInput}
-                onChange={(event) => setSearchInput(event.target.value)}
-                placeholder={t("search.placeholder")}
-              />
-            </label>
-
-            <label className={styles.sortField}>
-              <span className="sr-only">{t("catalog.sort")}</span>
-              <select
-                value={sort}
-                onChange={(event) => {
-                  setSort(event.target.value as CatalogSort);
-                  setPage(1);
-                }}
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <button type="submit" className={styles.searchButton}>
-              {t("search.submitButton")}
-            </button>
-          </form>
-
-          <div className={styles.metaRow}>
-            <div>
-              <span>{t("catalog.count", { count: total })}</span>
-              {selectedCategoryName ? (
-                <span className={styles.metaHint}>{selectedCategoryName}</span>
-              ) : null}
-            </div>
-            {isFetching && !isLoading ? (
-              <span className={styles.metaHint}>{t("catalog.updating")}</span>
-            ) : null}
-          </div>
-
           {isLoading ? (
             <CatalogSkeleton />
           ) : isError ? (

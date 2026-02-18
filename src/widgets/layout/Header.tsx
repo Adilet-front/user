@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { getUserActiveReservations } from "../../entities/booking/api/bookingApi";
 import { getUnreadNotificationsCount } from "../../entities/notification/api/notificationApi";
 import { useAuth } from "../../features/auth/model/useAuth";
+import { resolveAvatarUrl } from "../../shared/lib/media/avatar";
 import { useSearchSuggestions } from "../../shared/lib/search/useSearchSuggestions";
 import styles from "./Header.module.scss";
 
@@ -23,10 +24,13 @@ export const Header = () => {
   );
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [avatarLoadFailed, setAvatarLoadFailed] = useState(false);
   const searchTimerRef = useRef<number | null>(null);
   const dropdownCloseTimerRef = useRef<number | null>(null);
   const actionsRef = useRef<HTMLDivElement | null>(null);
   const canUseDom = typeof document !== "undefined";
+  const resolvedAvatarUrl = resolveAvatarUrl(user?.avatarUrl);
+  const avatarSrc = avatarLoadFailed ? null : resolvedAvatarUrl;
 
   const { data: activeReservations = [] } = useQuery({
     queryKey: ["reservations", "active"],
@@ -131,6 +135,10 @@ export const Header = () => {
       document.removeEventListener("pointerdown", handlePointerDown);
     };
   }, [activeDropdown, canUseDom, closeDropdowns]);
+
+  useEffect(() => {
+    setAvatarLoadFailed(false);
+  }, [resolvedAvatarUrl]);
 
   const submitSearch = (term: string) => {
     const normalized = term.trim();
@@ -360,11 +368,12 @@ export const Header = () => {
                   aria-label={t("nav.profile")}
                   onClick={() => toggleDropdown("profile")}
                 >
-                  {user?.avatarUrl ? (
+                  {avatarSrc ? (
                     <img
                       className={styles.profileAvatar}
-                      src={user.avatarUrl}
+                      src={avatarSrc}
                       alt=""
+                      onError={() => setAvatarLoadFailed(true)}
                     />
                   ) : (
                     <span className={styles.profileAvatar} aria-hidden="true" />
@@ -441,11 +450,12 @@ export const Header = () => {
             ) : (
               <>
                 <div className={styles.mobileProfileCard}>
-                  {user?.avatarUrl ? (
+                  {avatarSrc ? (
                     <img
                       className={styles.mobileProfileAvatar}
-                      src={user.avatarUrl}
+                      src={avatarSrc}
                       alt=""
+                      onError={() => setAvatarLoadFailed(true)}
                     />
                   ) : (
                     <div className={styles.mobileProfileAvatar} />
