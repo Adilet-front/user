@@ -30,6 +30,12 @@ export const resources = {
         suggestionTypeAuthor: "Автор",
         suggestionTypeBook: "Книга",
         suggestionAuthorHint: "Найти книги этого автора",
+        resultsFor: "Результаты поиска «{{query}}»",
+        tabs: {
+          books: "Книги {{count}}",
+          authors: "Авторы {{count}}",
+          series: "Серии {{count}}",
+        },
         startHint: "Введите название книги или автора для поиска.",
         empty: "Введите поисковый запрос или выберите категорию.",
         inMyBooks: "В моих книгах",
@@ -441,6 +447,8 @@ export const resources = {
         listTitle: "Отзывы",
         writeAction: "Оставить отзыв",
         editAction: "Редактировать отзыв",
+        deleteAction: "Удалить отзыв",
+        deleteConfirm: "Удалить ваш отзыв?",
         singleReviewHint:
           "У одной книги может быть только один ваш отзыв. Вы можете изменить его в любое время.",
         loading: "Загружаем отзывы...",
@@ -462,6 +470,7 @@ export const resources = {
         submit: "Оставить отзыв",
         duplicateError: "Вы уже оставляли отзыв на эту книгу.",
         submitError: "Не удалось отправить отзыв. Попробуйте позже.",
+        deleteError: "Не удалось удалить отзыв. Попробуйте позже.",
       },
       admin: {
         layout: {
@@ -660,6 +669,12 @@ export const resources = {
         suggestionTypeAuthor: "Author",
         suggestionTypeBook: "Book",
         suggestionAuthorHint: "Find books by this author",
+        resultsFor: "Search results for \"{{query}}\"",
+        tabs: {
+          books: "Books {{count}}",
+          authors: "Authors {{count}}",
+          series: "Series {{count}}",
+        },
         startHint: "Type a book title or author to start searching.",
         empty: "Enter a search query or choose a category.",
         inMyBooks: "In my books",
@@ -1067,6 +1082,8 @@ export const resources = {
         listTitle: "Reviews",
         writeAction: "Write a review",
         editAction: "Edit review",
+        deleteAction: "Delete review",
+        deleteConfirm: "Delete your review?",
         singleReviewHint:
           "You can keep only one review per book. You can edit it anytime.",
         loading: "Loading reviews...",
@@ -1088,6 +1105,7 @@ export const resources = {
         submit: "Submit review",
         duplicateError: "You have already reviewed this book.",
         submitError: "Could not submit review. Please try again later.",
+        deleteError: "Could not delete review. Please try again later.",
       },
       admin: {
         layout: {
@@ -1286,6 +1304,12 @@ export const resources = {
         suggestionTypeAuthor: "Автор",
         suggestionTypeBook: "Китеп",
         suggestionAuthorHint: "Бул автордун китептерин табуу",
+        resultsFor: "«{{query}}» боюнча издөө жыйынтыгы",
+        tabs: {
+          books: "Китептер {{count}}",
+          authors: "Авторлор {{count}}",
+          series: "Сериялар {{count}}",
+        },
         startHint: "Издөөнү баштоо үчүн китептин атын же авторду жазыңыз.",
         empty: "Издөө сурамын жазыңыз же категория тандаңыз.",
         inMyBooks: "Менин китептеримде",
@@ -1695,6 +1719,8 @@ export const resources = {
         listTitle: "Пикирлер",
         writeAction: "Пикир жазуу",
         editAction: "Пикирди өзгөртүү",
+        deleteAction: "Пикирди өчүрүү",
+        deleteConfirm: "Пикириңизди өчүрөсүзбү?",
         singleReviewHint:
           "Бир китепке бир гана пикир калтыра аласыз. Аны каалаган убакта өзгөртө аласыз.",
         loading: "Пикирлер жүктөлүүдө...",
@@ -1716,6 +1742,7 @@ export const resources = {
         submit: "Пикир калтыруу",
         duplicateError: "Сиз бул китепке буга чейин пикир калтыргансыз.",
         submitError: "Пикирди жөнөтүү мүмкүн болгон жок. Кийинчерээк кайталаңыз.",
+        deleteError: "Пикирди өчүрүү мүмкүн болгон жок. Кийинчерээк кайталаңыз.",
       },
       admin: {
         layout: {

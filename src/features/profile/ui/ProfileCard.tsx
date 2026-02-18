@@ -8,6 +8,7 @@ import {
   updateProfile,
   uploadAvatar,
 } from "../../../entities/user/api/userApi";
+import { resolveAvatarUrl } from "../../../shared/lib/media/avatar";
 
 export const ProfileCard = () => {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ export const ProfileCard = () => {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [avatarMessage, setAvatarMessage] = useState<string | null>(null);
   const [avatarError, setAvatarError] = useState<string | null>(null);
+  const [avatarLoadFailed, setAvatarLoadFailed] = useState(false);
 
   const firstName = firstNameDraft ?? data?.firstName ?? "";
   const lastName = lastNameDraft ?? data?.lastName ?? "";
@@ -35,6 +37,11 @@ export const ProfileCard = () => {
     () => (avatarFile ? URL.createObjectURL(avatarFile) : null),
     [avatarFile],
   );
+  const profileAvatarUrl = useMemo(
+    () => resolveAvatarUrl(data?.avatarUrl),
+    [data?.avatarUrl],
+  );
+  const avatarSrc = avatarPreview || (avatarLoadFailed ? null : profileAvatarUrl);
 
   useEffect(() => {
     return () => {
@@ -43,6 +50,10 @@ export const ProfileCard = () => {
       }
     };
   }, [avatarPreview]);
+
+  useEffect(() => {
+    setAvatarLoadFailed(false);
+  }, [profileAvatarUrl, avatarPreview]);
 
   const updateProfileMutation = useMutation({
     mutationFn: updateProfile,
@@ -220,12 +231,17 @@ export const ProfileCard = () => {
             {t("profile.role")}: {data.role}
           </p>
         </div>
-        {avatarPreview || data.avatarUrl ? (
+        {avatarSrc ? (
           <div className="avatar-preview" style={{ width: 72, height: 72 }}>
             <img
-              src={avatarPreview || data.avatarUrl}
+              src={avatarSrc}
               alt={t("profile.avatarAlt")}
               className="avatar-preview-image"
+              onError={() => {
+                if (!avatarPreview) {
+                  setAvatarLoadFailed(true);
+                }
+              }}
             />
           </div>
         ) : (
@@ -344,12 +360,17 @@ export const ProfileCard = () => {
           </label>
           <div className="field">
             <span>{t("profile.fields.preview")}</span>
-            {avatarPreview || data.avatarUrl ? (
+            {avatarSrc ? (
               <div className="avatar-preview">
                 <img
-                  src={avatarPreview || data.avatarUrl}
+                  src={avatarSrc}
                   alt={t("profile.avatarPreviewAlt")}
                   className="avatar-preview-image"
+                  onError={() => {
+                    if (!avatarPreview) {
+                      setAvatarLoadFailed(true);
+                    }
+                  }}
                 />
               </div>
             ) : (

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { BookCard, type Book } from "../../entities/book/ui/BookCard";
 import { getBooks } from "../../entities/book/api/bookApi";
+import type { BookStatus } from "../../entities/book/model/types";
 import { getUserReservations } from "../../entities/booking/api/bookingApi";
 import type { Reservation } from "../../entities/booking/model/types";
 import { Pagination } from "../../shared/ui/Pagination/Pagination";
@@ -24,16 +25,22 @@ const getReservationTimestamp = (reservation: Reservation) =>
 
 const getMyBookStatus = (
   reservation: Reservation,
+  bookStatus?: BookStatus,
 ): "TAKEN" | "RESERVED" | "RETURNED" | "CANCELLED" => {
-  if (
-    reservation.returnedAt ||
-    reservation.status === "RETURNED" ||
-    reservation.status === "COMPLETED"
-  ) {
+  const isInHandsByBookStatus =
+    bookStatus === "IN_YOUR_HANDS" || bookStatus === "TAKEN";
+
+  if (reservation.returnedAt || reservation.status === "RETURNED") {
     return "RETURNED";
   }
 
-  if (reservation.takenAt) {
+  // Fallback for inconsistent backend state:
+  // reservation can stay COMPLETED while the book is already back in library.
+  if (reservation.status === "COMPLETED" && !isInHandsByBookStatus) {
+    return "RETURNED";
+  }
+
+  if (reservation.takenAt || reservation.status === "COMPLETED") {
     return "TAKEN";
   }
 
@@ -45,9 +52,9 @@ const getMyBookStatus = (
 };
 
 const myBookStatusPriority: Record<MyBook["status"], number> = {
-  TAKEN: 4,
-  RESERVED: 3,
-  RETURNED: 2,
+  RETURNED: 4,
+  TAKEN: 3,
+  RESERVED: 2,
   CANCELLED: 1,
 };
 
@@ -140,7 +147,7 @@ export const MyBooksPage = () => {
           title: reservation.bookTitle ?? book?.title ?? t("book.untitled"),
           author: book?.author ?? "—",
           coverUrl: book?.coverUrl,
-          status: getMyBookStatus(reservation),
+          status: getMyBookStatus(reservation, book?.status),
           reservation,
         } as MyBook;
       });

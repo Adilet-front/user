@@ -6,7 +6,11 @@ import { useAuth } from "../../auth/model/useAuth";
 import type { Book as CardBook } from "../../../entities/book/ui/BookCard";
 import { getBookById, getBooks } from "../../../entities/book/api/bookApi";
 import type { Book as ApiBook, BookStatus } from "../../../entities/book/model/types";
-import { createReview, getBookReviews } from "../../../entities/review/api/reviewApi";
+import {
+  createReview,
+  deleteReviewById,
+  getBookReviews,
+} from "../../../entities/review/api/reviewApi";
 import type { Review } from "../../../entities/review/model/types";
 import {
   cancelReservation,
@@ -121,6 +125,7 @@ export const BookDetails = () => {
     Record<number, number>
   >({});
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [deletingReviewId, setDeletingReviewId] = useState<number | null>(null);
 
   const stateBook = (
     location.state as { book?: CardBook & { location?: string } } | null
@@ -196,14 +201,27 @@ export const BookDetails = () => {
     return activeReservations.find((item) => item.bookId === book.id);
   }, [activeReservations, book]);
 
-  const reviews = useMemo(
-    () =>
-      [...reviewsData].sort(
-        (left, right) =>
-          new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime(),
-      ),
-    [reviewsData],
-  );
+  const reviews = useMemo(() => {
+    const sorted = [...reviewsData].sort(
+      (left, right) =>
+        new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime(),
+    );
+
+    const uniqueEmails = new Set<string>();
+    return sorted.filter((review) => {
+      const email = normalizeEmail(review.userEmail);
+      if (!email) {
+        return true;
+      }
+
+      if (uniqueEmails.has(email)) {
+        return false;
+      }
+
+      uniqueEmails.add(email);
+      return true;
+    });
+  }, [reviewsData]);
 
   const averageRating = useMemo(() => {
     if (typeof book?.averageRating === "number") {
@@ -372,6 +390,28 @@ export const BookDetails = () => {
     },
   });
 
+  const deleteReviewMutation = useMutation({
+    mutationFn: (payload: { reviewId: number; bookId: number }) =>
+      deleteReviewById(payload.reviewId),
+    onMutate: ({ reviewId }) => {
+      setDeletingReviewId(reviewId);
+    },
+    onSuccess: (_, variables) => {
+      setReviewValidationError(null);
+      setReviewComment("");
+      setReviewRating(5);
+      setIsReviewModalOpen(false);
+      queryClient.invalidateQueries({ queryKey: ["book", variables.bookId] });
+      queryClient.invalidateQueries({
+        queryKey: ["book", variables.bookId, "reviews"],
+      });
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+    },
+    onSettled: () => {
+      setDeletingReviewId(null);
+    },
+  });
+
   useEffect(() => {
     if (!isReviewModalOpen) {
       return;
@@ -432,6 +472,8 @@ export const BookDetails = () => {
   };
 
   const openReviewModal = () => {
+    createReviewMutation.reset();
+    deleteReviewMutation.reset();
     setReviewValidationError(null);
     if (ownReview) {
       setReviewRating(ownReview.rating);
@@ -443,6 +485,21 @@ export const BookDetails = () => {
     setIsReviewModalOpen(true);
   };
 
+  const handleReviewDelete = (reviewId: number) => {
+    if (!book) {
+      return;
+    }
+
+    if (!window.confirm(t("reviews.deleteConfirm"))) {
+      return;
+    }
+
+    deleteReviewMutation.reset();
+    createReviewMutation.reset();
+    setReviewValidationError(null);
+    deleteReviewMutation.mutate({ reviewId, bookId: book.id });
+  };
+
   const handleReviewSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const comment = reviewComment.trim();
@@ -452,6 +509,7 @@ export const BookDetails = () => {
     }
 
     setReviewValidationError(null);
+    createReviewMutation.reset();
     createReviewMutation.mutate({
       bookId: book.id,
       rating: reviewRating,
@@ -475,6 +533,7 @@ export const BookDetails = () => {
 
   const coverSrc = resolveCoverUrl(book.coverUrl);
   const reviewStatus = getErrorStatus(createReviewMutation.error);
+  const deleteReviewStatus = getErrorStatus(deleteReviewMutation.error);
   const visibleReviewsCount =
     hasBookId
       ? (visibleReviewsCountByBook[bookId as number] ?? REVIEWS_PAGE_SIZE)
@@ -627,7 +686,7 @@ export const BookDetails = () => {
                     className={styles.reviewCard}
                   >
                     <div className={styles.reviewHeader}>
-                      <div>
+                      <div className={styles.reviewMeta}>
                         <p className={styles.reviewAuthor}>
                           {review.userEmail}
                           {isOwnReview ? (
@@ -644,6 +703,32 @@ export const BookDetails = () => {
                     <p className={styles.reviewComment}>
                       {review.comment?.trim() || t("reviews.noComment")}
                     </p>
+                    {isOwnReview ? (
+                      <div className={styles.reviewActions}>
+                        <button
+                          type="button"
+                          className={styles.reviewActionButton}
+                          onClick={openReviewModal}
+                          disabled={deleteReviewMutation.isPending}
+                        >
+                          {t("reviews.editAction")}
+                        </button>
+                        <button
+                          type="button"
+                          className={`${styles.reviewActionButton} ${styles.reviewActionDelete}`}
+                          onClick={() => handleReviewDelete(review.id)}
+                          disabled={
+                            deleteReviewMutation.isPending &&
+                            deletingReviewId === review.id
+                          }
+                        >
+                          {deleteReviewMutation.isPending &&
+                          deletingReviewId === review.id
+                            ? t("reviews.saving")
+                            : t("reviews.deleteAction")}
+                        </button>
+                      </div>
+                    ) : null}
                   </article>
                 );
               })}
@@ -670,6 +755,9 @@ export const BookDetails = () => {
         ) : (
           <p className={styles.mutedText}>{t("reviews.empty")}</p>
         )}
+        {deleteReviewStatus ? (
+          <p className={styles.errorText}>{t("reviews.deleteError")}</p>
+        ) : null}
       </section>
 
       {isReviewModalOpen ? (
