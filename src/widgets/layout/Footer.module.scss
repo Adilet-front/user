@@ -1,6 +1,6 @@
 .footer {
   border-top: 1px solid var(--border);
-  background: rgba(247, 242, 251, 0.95);
+  background: var(--surface-subtle);
 }
 
 .inner {
@@ -23,7 +23,7 @@
 }
 
 .meta {
-  color: #6b5b7d;
+  color: var(--text-muted);
   font-size: 0.85rem;
 }
 

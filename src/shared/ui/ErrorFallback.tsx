@@ -43,7 +43,7 @@ export const ErrorFallback = ({ error, onReset }: ErrorFallbackProps) => {
         <h1 style={{ fontSize: "1.25rem", fontWeight: 600 }}>
           {t("errors.fallbackTitle")}
         </h1>
-        <p style={{ fontSize: "0.9375rem", color: "#6b5b7d" }}>
+        <p style={{ fontSize: "0.9375rem", color: "var(--text-muted)" }}>
           {t("errors.fallbackSubtitle")}
         </p>
         {error && isDev && (

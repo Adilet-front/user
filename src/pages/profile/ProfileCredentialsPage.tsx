@@ -96,8 +96,8 @@ export const ProfileCredentialsPage = () => {
         </button>
       </form>
 
-      {resultError ? <p style={{ color: "#c53030" }}>{resultError}</p> : null}
-      {resultMessage ? <p style={{ color: "#2f855a" }}>{resultMessage}</p> : null}
+      {resultError ? <p className="text-danger">{resultError}</p> : null}
+      {resultMessage ? <p className="text-success">{resultMessage}</p> : null}
     </section>
   );
 };

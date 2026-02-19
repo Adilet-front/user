@@ -15,12 +15,12 @@
 .page-header h1 {
   margin: 0 0 0.5rem 0;
   font-size: 2rem;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 .page-header p {
   margin: 0;
-  color: #666;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
@@ -33,9 +33,9 @@
 }
 
 .filter-btn {
-  background: white;
-  color: #666;
-  border: 1px solid #e0e0e0;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -51,7 +51,7 @@
 
 .filter-btn.active {
   background: #4a90e2;
-  color: white;
+  color: var(--text-inverse);
   border-color: #4a90e2;
 }
 
@@ -63,10 +63,10 @@
 }
 
 .reservation-card {
-  background: white;
+  background: var(--surface);
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -76,7 +76,7 @@
 
 .reservation-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .reservation-info {
@@ -86,11 +86,11 @@
 .reservation-info h3 {
   margin: 0 0 1rem 0;
   font-size: 1.25rem;
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 .reservation-info h3 a {
-  color: #1a1a2e;
+  color: var(--text-primary);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -114,14 +114,14 @@
 
 .date-label {
   font-size: 0.75rem;
-  color: #999;
+  color: var(--text-muted);
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .date-value {
   font-size: 0.875rem;
-  color: #333;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -155,8 +155,8 @@
 }
 
 .badge-default {
-  background: #f5f5f5;
-  color: #666;
+  background: var(--surface-soft);
+  color: var(--text-muted);
 }
 
 /* Actions */
@@ -186,7 +186,7 @@
 
 .btn-primary {
   background: #4a90e2;
-  color: white;
+  color: var(--text-inverse);
 }
 
 .btn-primary:hover {
@@ -194,22 +194,22 @@
 }
 
 .btn-primary:disabled {
-  background: #ccc;
+  background: var(--border-strong);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background: #f5f5f5;
-  color: #666;
+  background: var(--surface-soft);
+  color: var(--text-muted);
 }
 
 .btn-secondary:hover {
-  background: #e0e0e0;
+  background: var(--border);
 }
 
 .btn-success {
   background: #4caf50;
-  color: white;
+  color: var(--text-inverse);
 }
 
 .btn-success:hover {
@@ -218,7 +218,7 @@
 
 .btn-reserve {
   background: #4a90e2;
-  color: white;
+  color: var(--text-inverse);
   width: 100%;
 }
 
@@ -228,7 +228,7 @@
 
 .btn-reserve:disabled,
 .btn-reserve.disabled {
-  background: #ccc;
+  background: var(--border-strong);
   cursor: not-allowed;
 }
 
@@ -236,21 +236,21 @@
 .loading-spinner {
   text-align: center;
   padding: 3rem;
-  color: #999;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
 .empty-state {
   text-align: center;
   padding: 3rem;
-  background: white;
+  background: var(--surface);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .empty-state p {
   margin: 0 0 1.5rem 0;
-  color: #999;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 

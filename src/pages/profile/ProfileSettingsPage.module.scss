@@ -9,7 +9,7 @@
 }
 
 .header p {
-  color: #6b5b7d;
+  color: var(--text-muted);
 }
 
 .card {
@@ -29,7 +29,7 @@
 
 .card p {
   margin: 0;
-  color: #6b5b7d;
+  color: var(--text-muted);
 }
 
 .actionButton {
@@ -37,7 +37,7 @@
   padding: 8px 16px;
   border: none;
   background: var(--purple-700);
-  color: #fff;
+  color: var(--text-inverse);
   font-weight: 600;
   cursor: pointer;
 }
@@ -47,7 +47,7 @@
   padding: 8px 16px;
   border: 1px solid var(--border);
   background: var(--surface);
-  color: #5a4a6c;
+  color: var(--text-secondary);
   font-weight: 600;
   cursor: pointer;
 }
@@ -65,12 +65,12 @@
 
 .notificationDate {
   font-size: 0.82rem;
-  color: #8a7b98;
+  color: var(--text-muted);
 }
 
 .cardUnread {
   border-color: rgba(107, 70, 193, 0.35);
-  background: rgba(237, 233, 254, 0.35);
+  background: var(--purple-100);
 }
 
 .toggle {
@@ -88,7 +88,7 @@
 .toggle span {
   position: absolute;
   inset: 0;
-  background: #d9d1e6;
+  background: var(--border);
   border-radius: 999px;
   transition: background 0.2s ease;
 }
@@ -101,7 +101,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--surface);
   transition: transform 0.2s ease;
 }
 

@@ -12,6 +12,7 @@
   --primary-active: #553C9A;
   --purple-900: #1A202C;
   --purple-700: #6B46C1;
+  --purple-600: #5B3EA6;
   --purple-500: #6B46C1;
   --purple-300: #9F7AEA;
   --purple-100: #EDE9FE;
@@ -20,10 +21,57 @@
   --accent-red: #F56565;
   --surface: #FFFFFF;
   --surface-soft: #E2E8F0;
+  --surface-soft-2: #F5F8FE;
+  --surface-subtle: #F7F2FB;
+  --surface-overlay: rgba(255, 255, 255, 0.92);
   --border: #E2E8F0;
+  --border-strong: #C8D0DF;
+  --text-primary: #1A202C;
+  --text-secondary: #5A4A6C;
+  --text-muted: #7B6B8D;
+  --text-danger: #C53030;
+  --text-success: #2F855A;
+  --text-inverse: #FFFFFF;
+  --overlay: rgba(15, 23, 42, 0.28);
+  --overlay-strong: rgba(0, 0, 0, 0.55);
+  --body-glow-1: rgba(159, 122, 234, 0.12);
+  --body-glow-2: rgba(107, 70, 193, 0.08);
+  --body-bg: #FFFFFF;
   --shadow: 0 1px 3px rgba(26, 32, 44, 0.08);
   --shadow-md: 0 10px 25px -5px rgba(26, 32, 44, 0.12), 0 4px 10px -5px rgba(26, 32, 44, 0.06);
   --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #E6EDF8;
+  background-color: #0B1322;
+  --purple-900: #E6EDF8;
+  --purple-700: #CDB8FF;
+  --purple-600: #B898FF;
+  --purple-500: #BFA5FF;
+  --purple-300: #A987FF;
+  --purple-100: #30234A;
+  --surface: #121D30;
+  --surface-soft: #1A273E;
+  --surface-soft-2: #212E49;
+  --surface-subtle: #172338;
+  --surface-overlay: rgba(12, 20, 34, 0.92);
+  --border: #2B3B57;
+  --border-strong: #3A4D6D;
+  --text-primary: #E6EDF8;
+  --text-secondary: #C2CDE1;
+  --text-muted: #93A5C4;
+  --text-danger: #FF9D9D;
+  --text-success: #66D9A8;
+  --text-inverse: #FFFFFF;
+  --overlay: rgba(2, 6, 23, 0.58);
+  --overlay-strong: rgba(2, 6, 23, 0.76);
+  --body-glow-1: rgba(122, 93, 224, 0.26);
+  --body-glow-2: rgba(88, 63, 173, 0.24);
+  --body-bg: #0B1322;
+  --shadow: 0 1px 4px rgba(2, 6, 23, 0.45);
+  --shadow-md: 0 14px 36px -10px rgba(2, 6, 23, 0.55), 0 6px 14px -8px rgba(2, 6, 23, 0.45);
 }
 
 * {
@@ -37,9 +85,10 @@ body {
   min-height: calc(100vh - env(safe-area-inset-bottom, 0px));
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
-  background: radial-gradient(1400px 700px at 85% -15%, rgba(159, 122, 234, 0.12) 0%, transparent 55%),
-    radial-gradient(1000px 600px at -5% 20%, rgba(107, 70, 193, 0.08) 0%, transparent 50%),
-    #FFFFFF;
+  background: radial-gradient(1400px 700px at 85% -15%, var(--body-glow-1) 0%, transparent 55%),
+    radial-gradient(1000px 600px at -5% 20%, var(--body-glow-2) 0%, transparent 50%),
+    var(--body-bg);
+  color: var(--text-primary);
 }
 
 body.search-open {
@@ -67,7 +116,7 @@ h2 {
 }
 
 p {
-  color: #1A202C;
+  color: var(--text-primary);
   font-size: 14px;
 }
 
@@ -103,7 +152,7 @@ select {
   align-items: center;
   justify-content: space-between;
   padding: 24px clamp(24px, 4vw, 64px);
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--surface-overlay);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
   transition: box-shadow var(--transition);
@@ -184,7 +233,7 @@ select {
 
 label {
   font-size: 14px;
-  color: #1A202C;
+  color: var(--text-primary);
 }
 
 input,
@@ -253,7 +302,7 @@ select:focus {
 
 .form-hint {
   font-size: 0.85rem;
-  color: #7b6b8d;
+  color: var(--text-muted);
 }
 
 .auth-link {
@@ -286,7 +335,7 @@ select:focus {
 }
 
 .auth-success {
-  color: #1c8b4c;
+  color: var(--text-success);
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -307,7 +356,7 @@ select:focus {
   span {
     padding: 0 12px;
     font-size: 0.85rem;
-    color: #7b6b8d;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -599,7 +648,7 @@ select:focus {
 
 .book-card__body p {
   font-size: 14px;
-  color: #1A202C;
+  color: var(--text-secondary);
 }
 
 .status {
@@ -665,7 +714,7 @@ select:focus {
 
 .lead {
   font-size: 1rem;
-  color: #1A202C;
+  color: var(--text-secondary);
 }
 
 .book-details__body {
@@ -678,7 +727,7 @@ select:focus {
   list-style: none;
   display: grid;
   gap: 8px;
-  color: #1A202C;
+  color: var(--text-secondary);
 }
 
 .profile {
@@ -709,7 +758,7 @@ select:focus {
   padding: 8px 16px;
   border-radius: 999px;
   cursor: pointer;
-  color: #1A202C;
+  color: var(--text-primary);
   transition: background var(--transition), color var(--transition);
 }
 
@@ -759,8 +808,20 @@ select:focus {
 }
 
 .muted {
-  color: #718096;
+  color: var(--text-muted);
   font-size: 12px;
+}
+
+.text-danger {
+  color: var(--text-danger);
+}
+
+.text-success {
+  color: var(--text-success);
+}
+
+.text-muted {
+  color: var(--text-muted);
 }
 
 @keyframes fade-up {

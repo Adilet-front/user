@@ -297,8 +297,8 @@ export const ProfileCard = () => {
             <input type="text" value={data.role} readOnly />
           </label>
         </div>
-        {profileError ? <p style={{ color: "#c53030" }}>{profileError}</p> : null}
-        {profileMessage ? <p style={{ color: "#2f855a" }}>{profileMessage}</p> : null}
+        {profileError ? <p className="text-danger">{profileError}</p> : null}
+        {profileMessage ? <p className="text-success">{profileMessage}</p> : null}
         <div className="profile-actions">
           <button
             className="button primary"
@@ -336,8 +336,8 @@ export const ProfileCard = () => {
             />
           </label>
         </div>
-        {emailError ? <p style={{ color: "#c53030" }}>{emailError}</p> : null}
-        {emailMessage ? <p style={{ color: "#2f855a" }}>{emailMessage}</p> : null}
+        {emailError ? <p className="text-danger">{emailError}</p> : null}
+        {emailMessage ? <p className="text-success">{emailMessage}</p> : null}
         <div className="profile-actions">
           <button
             className="button primary"
@@ -390,8 +390,8 @@ export const ProfileCard = () => {
             )}
           </div>
         </div>
-        {avatarError ? <p style={{ color: "#c53030" }}>{avatarError}</p> : null}
-        {avatarMessage ? <p style={{ color: "#2f855a" }}>{avatarMessage}</p> : null}
+        {avatarError ? <p className="text-danger">{avatarError}</p> : null}
+        {avatarMessage ? <p className="text-success">{avatarMessage}</p> : null}
         <div className="profile-actions">
           <button className="button primary" type="submit" disabled={isSaving}>
             {uploadAvatarMutation.isPending
