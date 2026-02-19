@@ -1,8 +1,9 @@
 import axios from "axios";
-//import { getEnv } from "../config/env";
+import { getEnv } from "../config/env";
 import { clearTokens, getAccessToken } from "../lib/auth/token";
 
 const isBrowser = () => typeof window !== "undefined";
+const API_BASE_URL = getEnv().apiBaseUrl.replace(/\/+$/, "");
 
 const redirectToLogin = () => {
   if (!isBrowser()) {
@@ -20,7 +21,7 @@ const redirectToLogin = () => {
 };
 
 export const apiClient = axios.create({
-  baseURL: "http://localhost:8080", // Прямо вот так, в кавычках
+  baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -30,7 +31,7 @@ apiClient.interceptors.request.use((config) => {
   const token = getAccessToken();
 
   if (token) {
-    config.headers.Authorization = Bearer ${token};
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
   return config;
