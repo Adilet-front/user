@@ -7,7 +7,17 @@ type EnvConfig = {
   coverBaseUrl: string;
 };
 
-export const getEnv = (): EnvConfig => ({
-  apiBaseUrl: import.meta.env.VITE_API_BASE_URL ?? "",
-  coverBaseUrl: import.meta.env.VITE_COVER_BASE_URL ?? "",
-});
+export const getEnv = (): EnvConfig => {
+  const apiBaseUrl = (
+    import.meta.env.VITE_API_BASE_URL ??
+    import.meta.env.VITE_API_URL ??
+    "http://localhost:8080"
+  ).trim();
+
+  const coverBaseUrl = (import.meta.env.VITE_COVER_BASE_URL ?? "").trim();
+
+  return {
+    apiBaseUrl,
+    coverBaseUrl,
+  };
+};
