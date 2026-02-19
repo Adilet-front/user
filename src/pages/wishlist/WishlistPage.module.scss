@@ -38,7 +38,7 @@
   justify-content: center;
   min-width: 34px;
   height: 34px;
-  color: #7b6b8d;
+  color: var(--text-muted);
 }
 
 .cardWrap {
@@ -71,7 +71,7 @@
 }
 
 .removeButton {
-  color: var(--accent-red, #e53e3e);
+  color: var(--accent-red);
   border-color: rgba(229, 62, 62, 0.3);
 }
 
@@ -81,7 +81,7 @@
 
 .empty {
   grid-column: 1 / -1;
-  color: #6b5b7d;
+  color: var(--text-muted);
   font-size: 0.9375rem;
 }
 

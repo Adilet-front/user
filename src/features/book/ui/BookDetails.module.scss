@@ -21,7 +21,7 @@
   flex-wrap: wrap;
   gap: 6px;
   font-size: 0.9rem;
-  color: #66718c;
+  color: var(--text-muted);
 }
 
 .breadcrumbs a {
@@ -35,9 +35,9 @@
   gap: 16px;
   padding: 18px;
   border-radius: 20px;
-  border: 1px solid rgba(180, 192, 217, 0.62);
-  background: linear-gradient(180deg, #ffffff 0%, #f9fafe 100%);
-  box-shadow: 0 16px 32px -26px rgba(25, 34, 63, 0.5);
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft-2) 100%);
+  box-shadow: var(--shadow-md);
 }
 
 .coverPanel {
@@ -88,7 +88,7 @@
 }
 
 .statusReturned {
-  color: #51607e;
+  color: var(--text-secondary);
   border-color: rgba(142, 156, 185, 0.44);
   background: rgba(231, 236, 246, 0.85);
 }
@@ -98,10 +98,10 @@
   align-items: center;
   border-radius: 999px;
   padding: 8px 12px;
-  border: 1px solid rgba(184, 194, 215, 0.68);
-  background: #f8faff;
+  border: 1px solid var(--border);
+  background: var(--surface-soft-2);
   font-size: 0.82rem;
-  color: #5f6986;
+  color: var(--text-secondary);
 }
 
 .mainInfo {
@@ -130,7 +130,7 @@
 
 .metaMuted {
   font-size: 0.82rem;
-  color: #7b87a6;
+  color: var(--text-muted);
 }
 
 .title {
@@ -141,7 +141,7 @@
 
 .author {
   margin: 0;
-  color: #5f6986;
+  color: var(--text-secondary);
   font-size: 1rem;
 }
 
@@ -150,7 +150,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  color: #4a5675;
+  color: var(--text-secondary);
 }
 
 .stars {
@@ -164,12 +164,12 @@
 }
 
 .starEmpty {
-  color: #d7dde8;
+  color: var(--text-muted);
 }
 
 .description {
   margin: 0;
-  color: #495776;
+  color: var(--text-secondary);
   line-height: 1.56;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -179,7 +179,7 @@
   display: grid;
   gap: 6px;
   font-size: 0.86rem;
-  color: #667390;
+  color: var(--text-muted);
 }
 
 .actionsPanel {
@@ -195,9 +195,9 @@
   gap: 8px;
   padding: 10px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(182, 193, 216, 0.8);
-  background: #ffffff;
-  color: #4d5a79;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -208,7 +208,7 @@
 }
 
 .wishlistButton svg {
-  color: #1c2232;
+  color: var(--text-primary);
   fill: none;
   stroke: currentColor;
 }
@@ -220,7 +220,7 @@
 .wishlistActive {
   color: #b0211f;
   border-color: rgba(229, 57, 53, 0.7);
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .wishlistActive svg {
@@ -231,10 +231,10 @@
 
 .actionButton {
   border-radius: 999px;
-  border: 1px solid rgba(182, 193, 216, 0.82);
+  border: 1px solid var(--border);
   padding: 10px 12px;
-  background: #ffffff;
-  color: #475473;
+  background: var(--surface);
+  color: var(--text-secondary);
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -251,7 +251,7 @@
 .actionPrimary {
   border-color: transparent;
   background: linear-gradient(145deg, #5f46bd 0%, #7659d5 100%);
-  color: #ffffff;
+  color: var(--text-inverse);
 }
 
 .actionGhost {
@@ -266,20 +266,20 @@
 }
 
 .helpText {
-  color: #73809d;
+  color: var(--text-muted);
   font-size: 0.84rem;
 }
 
 .errorText {
-  color: #bf2f2b;
+  color: var(--text-danger);
   font-size: 0.84rem;
 }
 
 .sectionCard {
   display: grid;
   gap: 12px;
-  border: 1px solid rgba(180, 192, 217, 0.65);
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   border-radius: 16px;
   padding: 16px;
 }
@@ -309,11 +309,11 @@
 
 .formField select,
 .formField textarea {
-  border: 1px solid rgba(184, 194, 216, 0.78);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px 12px;
-  background: #f9fbff;
-  color: #24324f;
+  background: var(--surface-soft-2);
+  color: var(--text-primary);
 }
 
 .formField textarea {
@@ -328,10 +328,10 @@
 .reviewCard {
   display: grid;
   gap: 8px;
-  border: 1px solid rgba(188, 198, 220, 0.68);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 12px;
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .reviewHeader {
@@ -348,7 +348,7 @@
 .reviewAuthor {
   margin: 0;
   font-weight: 600;
-  color: #3f4d6d;
+  color: var(--text-secondary);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -362,14 +362,14 @@
   padding: 2px 8px;
   border: 1px solid rgba(94, 73, 173, 0.28);
   background: rgba(94, 73, 173, 0.1);
-  color: #5f46bd;
+  color: var(--primary);
   font-size: 0.72rem;
   font-weight: 700;
 }
 
 .reviewDate {
   margin: 2px 0 0;
-  color: #8591ad;
+  color: var(--text-muted);
   font-size: 0.82rem;
 }
 
@@ -383,7 +383,7 @@
 
 .reviewComment {
   margin: 0;
-  color: #495776;
+  color: var(--text-secondary);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -406,7 +406,7 @@
 }
 
 .reviewActionDelete {
-  color: #bf2f2b;
+  color: var(--text-danger);
 }
 
 .reviewActionButton:disabled {
@@ -425,13 +425,13 @@
 }
 
 .mutedText {
-  color: #75829f;
+  color: var(--text-muted);
 }
 
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(19, 27, 46, 0.48);
+  background: var(--overlay);
   display: grid;
   place-items: center;
   z-index: 80;
@@ -441,9 +441,9 @@
 .modal {
   width: min(520px, 100%);
   border-radius: 18px;
-  border: 1px solid rgba(183, 194, 220, 0.8);
-  background: #ffffff;
-  box-shadow: 0 20px 38px -22px rgba(20, 30, 56, 0.56);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
   padding: 18px;
 }
 

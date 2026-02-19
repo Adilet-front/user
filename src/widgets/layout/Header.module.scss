@@ -3,17 +3,17 @@
   top: 0;
   z-index: 12;
   isolation: isolate;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--surface-overlay);
   backdrop-filter: blur(14px);
   padding-top: env(safe-area-inset-top, 0px);
   /* Мягкая граница вместо белой линии между header и main */
-  box-shadow: 0 1px 0 0 rgba(26, 32, 44, 0.06);
+  box-shadow: var(--shadow);
 }
 
 .headerOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.28);
+  background: var(--overlay);
   backdrop-filter: blur(2px);
   z-index: 3;
 }
@@ -105,7 +105,7 @@
   height: 42px;
   padding: 0 18px;
   background: var(--primary);
-  color: #fff;
+  color: var(--text-inverse);
   font-size: 0.9rem;
   cursor: pointer;
   transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -138,7 +138,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--text-inverse);
   transform: translate(-50%, -50%);
   animation: search-dot 0.8s ease-in-out infinite;
 }
@@ -161,7 +161,7 @@
 
 .searchIcon {
   font-size: 0.85rem;
-  color: #7b6b8d;
+  color: var(--text-muted);
 }
 
 .searchDropdown {
@@ -181,14 +181,14 @@
 
 .searchEmpty {
   padding: 8px 10px;
-  color: #7b6b8d;
+  color: var(--text-muted);
   font-size: 0.88rem;
 }
 
 .searchOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.28);
+  background: var(--overlay);
   backdrop-filter: blur(2px);
   z-index: 11;
 }
@@ -200,7 +200,7 @@
   padding: 8px 10px;
   border-radius: 10px;
   cursor: pointer;
-  color: #4b3c5a;
+  color: var(--text-secondary);
   display: grid;
   gap: 4px;
 }
@@ -227,7 +227,7 @@
 
 .searchItemSecondary {
   font-size: 0.8rem;
-  color: #7b6b8d;
+  color: var(--text-muted);
   min-height: 1em;
 }
 
@@ -249,7 +249,7 @@
 
 .navLink {
   text-decoration: none;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   padding: 6px 10px;
   border-radius: 999px;
 }
@@ -271,7 +271,7 @@
   cursor: pointer;
   padding: 6px 10px;
   border-radius: 999px;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   border: 1px solid transparent;
   background: transparent;
   font: inherit;
@@ -319,7 +319,7 @@
 
 .navMenu a {
   text-decoration: none;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   padding: 6px 8px;
   border-radius: 10px;
 }
@@ -342,7 +342,7 @@
   align-items: center;
   gap: 6px;
   text-decoration: none;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -375,7 +375,7 @@
   top: -4px;
   right: -2px;
   background: var(--accent-red);
-  color: #fff;
+  color: var(--text-inverse);
   border-radius: 999px;
   padding: 2px 6px;
   font-size: 0.7rem;
@@ -386,7 +386,7 @@
   border-radius: 999px;
   padding: 8px 16px;
   background: var(--primary);
-  color: #fff;
+  color: var(--text-inverse);
   box-shadow: var(--shadow);
   font-weight: 600;
   transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -414,7 +414,7 @@
   cursor: pointer;
   padding: 6px 10px;
   border-radius: 999px;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   border: 1px solid var(--border);
   background: var(--surface);
   font: inherit;
@@ -440,7 +440,7 @@
 
 .profileRole {
   font-size: 0.72rem;
-  color: #8a7b98;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -495,20 +495,20 @@
 
 .profileInfoEmail {
   font-weight: 600;
-  color: #5a4a6c;
+  color: var(--text-secondary);
 }
 
 .profileInfoRole {
   font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #8a7b98;
+  color: var(--text-muted);
 }
 
 .profileDropdown a,
 .profileLogout {
   text-decoration: none;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   padding: 8px 10px;
   border-radius: 10px;
   border: none;
@@ -539,6 +539,36 @@
   position: relative;
 }
 
+.themeToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease,
+    color 0.22s ease;
+}
+
+.themeToggle:hover {
+  color: var(--primary);
+  border-color: rgba(107, 70, 193, 0.42);
+  box-shadow: 0 0 0 1px rgba(107, 70, 193, 0.15);
+  transform: translateY(-1px);
+}
+
+.themeToggleIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .languageSummary {
   display: inline-flex;
   align-items: center;
@@ -548,7 +578,7 @@
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
-  color: #5a4a6c;
+  color: var(--text-secondary);
   cursor: pointer;
   transition:
     border-color 0.22s ease,
@@ -600,7 +630,7 @@
 .languageOptionActive {
   border: 1px solid transparent;
   background: transparent;
-  color: #5a4a6c;
+  color: var(--text-secondary);
   border-radius: 10px;
   padding: 8px 10px;
   font: inherit;
@@ -641,7 +671,7 @@
   padding: 0 6px;
   border-radius: 999px;
   background: var(--accent-red);
-  color: #fff;
+  color: var(--text-inverse);
   font-size: 0.72rem;
   font-weight: 700;
 }
@@ -724,7 +754,7 @@
 
 .mobileLogoutButton:hover {
   background: var(--accent-red);
-  color: white;
+  color: var(--text-inverse);
   transform: scale(1.02);
 }
 
@@ -736,7 +766,7 @@
 }
 
 .mobileLanguageLabel {
-  color: #6b5b7d;
+  color: var(--text-muted);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -749,15 +779,61 @@
   gap: 8px;
 }
 
+.mobileTheme {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.mobileThemeLabel {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.mobileThemeButton {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--text-primary);
+  padding: 12px 14px;
+  cursor: pointer;
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.mobileThemeButton:hover {
+  transform: translateY(-1px);
+  border-color: rgba(107, 70, 193, 0.35);
+  color: var(--primary);
+}
+
+.mobileThemeIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .mobileLanguageButton,
 .mobileLanguageButtonActive {
   border-radius: 999px;
   padding: 8px 12px;
   font: inherit;
   font-size: 0.85rem;
-  border: 1px solid rgba(178, 188, 210, 0.72);
+  border: 1px solid var(--border);
   background: var(--surface-soft);
-  color: #4f4160;
+  color: var(--text-secondary);
   cursor: pointer;
   transition:
     transform 0.18s ease,
@@ -803,7 +879,7 @@
   height: 2px;
   width: 100%;
   border-radius: 999px;
-  background: #5a4a6c;
+  background: var(--text-secondary);
   transition:
     transform 0.18s ease,
     opacity 0.18s ease,
@@ -837,7 +913,7 @@
 .menuOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--overlay-strong);
   opacity: 0;
   animation: menu-fade-in 0.18s ease forwards;
 }
@@ -905,7 +981,7 @@
   width: 16px;
   height: 2px;
   border-radius: 999px;
-  background: #5a4a6c;
+  background: var(--text-secondary);
 }
 
 .mobileClose span:nth-child(1) {
@@ -934,7 +1010,7 @@
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 -2px 16px rgba(26, 32, 44, 0.08);
+  box-shadow: var(--shadow);
 }
 
 .mobilePanel[data-open="true"] {
@@ -1018,7 +1094,7 @@
     padding: 16px 20px;
     border-radius: 14px;
     background: var(--primary);
-    color: white;
+    color: var(--text-inverse);
     font-weight: 600;
     font-size: 1.05rem;
     text-align: center;

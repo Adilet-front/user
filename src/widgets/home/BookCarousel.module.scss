@@ -12,7 +12,7 @@
 
 .header h2 {
   margin: 0;
-  color: #1a2236;
+  color: var(--text-primary);
   font-size: clamp(1.25rem, 1.45vw + 0.72rem, 1.76rem);
   line-height: 1.2;
   letter-spacing: -0.025em;
@@ -28,8 +28,8 @@
   height: 34px;
   border-radius: 999px;
   border: 1px solid rgba(158, 172, 204, 0.58);
-  background: #ffffff;
-  color: #34405f;
+  background: var(--surface);
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 1.08rem;
   line-height: 1;
@@ -43,9 +43,9 @@
 
 .navButton:hover:not(:disabled) {
   transform: translateY(-1px);
-  background: #f0f4ff;
+  background: var(--surface-soft-2);
   border-color: rgba(95, 113, 164, 0.58);
-  color: #1f2b4d;
+  color: var(--text-primary);
 }
 
 .navButton:disabled {
@@ -84,9 +84,9 @@
 
 .empty {
   border-radius: 16px;
-  border: 1px dashed rgba(178, 188, 210, 0.72);
-  background: #f9fbff;
-  color: #67728f;
+  border: 1px dashed var(--border);
+  background: var(--surface-soft-2);
+  color: var(--text-muted);
   padding: 18px;
 }
 

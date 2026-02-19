@@ -4,16 +4,16 @@
 
 .book-history {
   margin-top: 2rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  background: white;
+  background: var(--surface);
 }
 
 .history-toggle {
   width: 100%;
   padding: 1rem 1.5rem;
-  background: #f8f9fa;
+  background: var(--surface-soft);
   border: none;
   display: flex;
   justify-content: space-between;
@@ -21,16 +21,16 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 1rem;
-  color: #1a1a2e;
+  color: var(--text-primary);
   transition: background 0.2s;
 }
 
 .history-toggle:hover {
-  background: #e9ecef;
+  background: var(--surface-soft);
 }
 
 .toggle-icon {
-  color: #666;
+  color: var(--text-muted);
   font-size: 0.875rem;
 }
 
@@ -43,11 +43,11 @@
 .history-empty {
   text-align: center;
   padding: 2rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .history-error {
-  color: #c62828;
+  color: var(--text-danger);
 }
 
 .history-list {
@@ -58,7 +58,7 @@
 
 .history-item {
   padding: 1rem;
-  background: #f8f9fa;
+  background: var(--surface-soft);
   border-radius: 8px;
   border-left: 3px solid #4a90e2;
 }
@@ -71,7 +71,7 @@
 }
 
 .history-user strong {
-  color: #1a1a2e;
+  color: var(--text-primary);
   font-size: 0.938rem;
 }
 
@@ -99,8 +99,8 @@
 }
 
 .status-cancelled {
-  background: #f5f5f5;
-  color: #666;
+  background: var(--surface-soft);
+  color: var(--text-muted);
 }
 
 .history-dates {
@@ -117,14 +117,14 @@
 
 .date-label {
   font-size: 0.75rem;
-  color: #999;
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .history-date span:last-child {
   font-size: 0.875rem;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {

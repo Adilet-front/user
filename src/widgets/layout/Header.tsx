@@ -9,6 +9,7 @@ import { useAuth } from "../../features/auth/model/useAuth";
 import type { AppLanguage } from "../../app/i18n/resources";
 import { resolveAvatarUrl } from "../../shared/lib/media/avatar";
 import { useSearchSuggestions } from "../../shared/lib/search/useSearchSuggestions";
+import { useTheme } from "../../shared/lib/theme/useTheme";
 import styles from "./Header.module.scss";
 
 type HeaderDropdown = "my-books" | "profile";
@@ -32,6 +33,7 @@ const resolveLanguageCode = (value?: string): AppLanguage => {
 export const Header = () => {
   const { t, i18n } = useTranslation();
   const { isAuthenticated, signOut, user } = useAuth();
+  const { isDarkTheme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -225,6 +227,12 @@ export const Header = () => {
   const hasUnreadNotifications = unreadNotificationsCount > 0;
   const effectiveDropdown =
     !isAuthenticated && activeDropdown === "profile" ? null : activeDropdown;
+  const themeToggleLabel = isDarkTheme
+    ? t("header.themeToggleToLight")
+    : t("header.themeToggleToDark");
+  const currentThemeLabel = isDarkTheme
+    ? t("header.themeDark")
+    : t("header.themeLight");
 
   return (
     <>
@@ -469,6 +477,18 @@ export const Header = () => {
               </div>
             )}
 
+            <button
+              type="button"
+              className={styles.themeToggle}
+              aria-label={themeToggleLabel}
+              title={themeToggleLabel}
+              onClick={toggleTheme}
+            >
+              <span className={styles.themeToggleIcon} aria-hidden="true">
+                {isDarkTheme ? "🌙" : "☀️"}
+              </span>
+            </button>
+
             <div
               className={styles.languageMenu}
               onMouseEnter={openLanguageMenu}
@@ -623,6 +643,20 @@ export const Header = () => {
                   </button>
                 ))}
               </div>
+            </div>
+            <div className={styles.mobileTheme}>
+              <span className={styles.mobileThemeLabel}>{t("header.theme")}</span>
+              <button
+                type="button"
+                className={styles.mobileThemeButton}
+                onClick={toggleTheme}
+                aria-label={themeToggleLabel}
+              >
+                <span className={styles.mobileThemeIcon} aria-hidden="true">
+                  {isDarkTheme ? "🌙" : "☀️"}
+                </span>
+                <span>{currentThemeLabel}</span>
+              </button>
             </div>
           </div>
         </div>

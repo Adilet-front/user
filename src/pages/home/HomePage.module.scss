@@ -14,12 +14,12 @@
   font-size: clamp(1.84rem, 2.65vw, 2.38rem);
   line-height: 1.06;
   letter-spacing: -0.03em;
-  color: #121b30;
+  color: var(--text-primary);
 }
 
 .header p {
   margin: 0;
-  color: #55627f;
+  color: var(--text-secondary);
   max-width: 720px;
   font-size: 1rem;
 }
@@ -44,12 +44,12 @@
 .skeletonCard {
   border-radius: 16px;
   height: 326px;
-  border: 1px solid rgba(180, 190, 212, 0.48);
+  border: 1px solid var(--border);
   background: linear-gradient(
     115deg,
-    rgba(237, 242, 255, 0.94) 0%,
-    rgba(250, 252, 255, 0.98) 45%,
-    rgba(235, 240, 253, 0.94) 100%
+    var(--surface-soft-2) 0%,
+    var(--surface) 45%,
+    var(--surface-soft-2) 100%
   );
   background-size: 280% 100%;
   animation: shimmer 1.25s ease-in-out infinite;
@@ -57,9 +57,9 @@
 
 .empty {
   border-radius: 16px;
-  border: 1px dashed rgba(185, 196, 220, 0.75);
-  background: #f9fbff;
-  color: #586684;
+  border: 1px dashed var(--border);
+  background: var(--surface-soft-2);
+  color: var(--text-muted);
   padding: 18px;
 }
 

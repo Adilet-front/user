@@ -19,7 +19,7 @@
 }
 
 .heroSubtitle {
-  color: #5b4a6c;
+  color: var(--text-secondary);
 }
 
 .grid {
@@ -42,7 +42,7 @@
 }
 
 .cardText {
-  color: #6b5b7d;
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
@@ -50,7 +50,7 @@
   padding: 20px;
   border-radius: 16px;
   border: 1px dashed var(--border);
-  color: #6b5b7d;
+  color: var(--text-muted);
 }
 
 @media (max-width: 720px) {
